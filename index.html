@@ -473,11 +473,11 @@ mq.innerHTML=[...mqI,...mqI].map(t=>`<span class="marquee-item"><span class="mst
 
 // slider
 const slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dot'),prog=document.getElementById('progress');
-let cs=0;
+let cs=0,advTimer=null;const FADE=2600;function schedAdv(v){clearTimeout(advTimer);if(!v.duration||!isFinite(v.duration)){v.addEventListener('loadedmetadata',function(){schedAdv(v);},{once:true});return;}var d=v.duration*1000,wait=Math.max(400,d-(FADE+300));advTimer=setTimeout(function(){showSlide(cs+1);},wait);}
 function getVidDur(vid){return(vid&&vid.duration&&isFinite(vid.duration))?vid.duration*1000:6000;}
 function showSlide(n){
   const outVid=slides[cs].querySelector('video');
-  if(outVid){outVid.pause();}
+  if(outVid){(function(v){setTimeout(function(){try{v.pause();v.currentTime=0;}catch(e){}},FADE);})(outVid);}
   slides[cs].classList.remove('active');dots[cs].classList.remove('active');
   cs=(n+slides.length)%slides.length;
   slides[cs].classList.add('active');dots[cs].classList.add('active');
@@ -485,7 +485,7 @@ function showSlide(n){
   if(inVid){
     inVid.currentTime=0;
     inVid.play().catch(()=>{});
-    inVid.onended=()=>showSlide(cs+1);
+    schedAdv(inVid);
     const dur=getVidDur(inVid);
     prog.style.transition='none';prog.style.width='0%';
     requestAnimationFrame(()=>requestAnimationFrame(()=>{prog.style.transition=`width ${dur}ms linear`;prog.style.width='100%'}));
@@ -501,7 +501,7 @@ document.getElementById('slider').addEventListener('touchend',e=>{const dx=e.cha
 const firstVid=slides[0].querySelector('video');
 if(firstVid){
   firstVid.play().catch(()=>{});
-  firstVid.onended=()=>showSlide(1);
+  schedAdv(firstVid);
   firstVid.addEventListener('loadedmetadata',()=>{
     prog.style.transition=`width ${firstVid.duration*1000}ms linear`;prog.style.width='100%';
   });
