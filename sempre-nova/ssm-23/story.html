@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face{font-family:'Anton';src:url('fonts/anton-latin-400-normal.woff2') format('woff2');font-weight:400}
+@font-face{font-family:'Oswald';src:url('fonts/oswald-latin-700-normal.woff2') format('woff2');font-weight:700}
+@font-face{font-family:'Oswald';src:url('fonts/oswald-latin-500-normal.woff2') format('woff2');font-weight:500}
+@font-face{font-family:'BarlowC';src:url('fonts/barlow-condensed-latin-500-normal.woff2') format('woff2');font-weight:500}
+
+:root{
+  --red:#D0202B;
+  --green:#AFCB08;
+  --dark:#0C0F0C;
+  --grey:#D8D6CE;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1080px;height:1920px;overflow:hidden;background:var(--dark)}
+.canvas{position:relative;width:1080px;height:1920px;overflow:hidden}
+
+/* ---------- FOTO ---------- */
+.photo{position:absolute;inset:0;background:url('bg.jpg') center/cover no-repeat;
+  filter:saturate(.88) contrast(1.06) brightness(.94);}
+
+/* scrim de céu */
+.sky{position:absolute;left:0;right:0;top:0;height:56%;
+  background:linear-gradient(180deg,rgba(6,9,7,.98) 0%,rgba(6,9,7,.96) 22%,rgba(8,12,9,.86) 44%,rgba(10,14,11,.42) 74%,rgba(10,14,11,0) 100%);}
+/* scrim de chão */
+.ground{position:absolute;left:0;right:0;top:58%;height:24%;
+  background:linear-gradient(180deg,rgba(10,13,10,0) 0%,rgba(10,13,10,.55) 38%,rgba(10,13,10,.88) 70%,#0C0F0C 100%);}
+/* faixa inferior sólida */
+.strip{position:absolute;left:0;right:0;bottom:0;height:18%;background:var(--dark);}
+
+/* ---------- TIPOGRAFIA ---------- */
+.wrap{position:absolute;inset:0;padding:0 81px;}
+
+.bar{position:absolute;top:21%;left:81px;width:120px;height:8px;background:var(--red)}
+.kicker{position:absolute;top:22.6%;left:81px;font-family:'Oswald';font-weight:500;font-size:30px;
+  letter-spacing:.30em;color:var(--grey);text-transform:uppercase;line-height:1}
+.model{position:absolute;top:25%;left:78px;font-family:'Anton';font-size:196px;line-height:.86;
+  color:#fff;letter-spacing:.005em}
+.status{position:absolute;top:36.4%;left:81px;font-family:'Oswald';font-weight:700;font-size:57px;
+  line-height:1.06;color:#fff;letter-spacing:.012em;text-transform:uppercase}
+.status .hl{color:var(--green)}
+
+.rule{position:absolute;top:70%;left:81px;width:918px;height:2px;background:rgba(175,203,8,.55)}
+
+.data{position:absolute;top:72%;left:81px;width:918px;display:grid;grid-template-columns:1fr 1fr 1fr}
+.col{padding-left:0}
+.col+.col{border-left:2px solid rgba(175,203,8,.45);padding-left:38px}
+.col:nth-child(2){padding-left:38px}
+.num{font-family:'Anton';font-size:82px;line-height:1;color:#fff}
+.lab{font-family:'BarlowC';font-weight:500;font-size:23px;letter-spacing:.18em;color:var(--grey);
+  text-transform:uppercase;margin-top:10px;line-height:1.15}
+
+.logo{position:absolute;left:81px;bottom:96px;width:430px}
+.logo img{width:100%;display:block}
+.tag{position:absolute;right:81px;bottom:112px;font-family:'BarlowC';font-weight:500;font-size:26px;
+  letter-spacing:.20em;color:rgba(216,214,206,.75);text-transform:uppercase;text-align:right;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="canvas">
+  <div class="photo"></div>
+  <div class="sky"></div>
+  <div class="ground"></div>
+  <div class="strip"></div>
+
+  <div class="bar"></div>
+  <div class="kicker">SEMEADORA DE PLANTIO DIRETO</div>
+  <div class="model">SSM 23</div>
+  <div class="status">UNIDADE REFORMADA<br>REVISADA E PRONTA PARA PLANTAR</div>
+
+  <div class="rule"></div>
+  <div class="data">
+    <div class="col"><div class="num">23</div><div class="lab">LINHAS A 17 CM</div></div>
+    <div class="col"><div class="num">17</div><div class="lab">LINHAS A 23 CM</div></div>
+    <div class="col"><div class="num">3</div><div class="lab">TIPOS DE SEMENTE</div></div>
+  </div>
+
+  <div class="logo"><img src="logo_escuro.png" alt=""></div>
+  <div class="tag">REVISADA<br>COM GARANTIA</div>
+</div>
+</body>
+</html>
